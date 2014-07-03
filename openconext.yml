@@ -1,0 +1,5 @@
+- hosts: openconext
+  sudo: true
+  roles:
+    - docker
+    - helloapp

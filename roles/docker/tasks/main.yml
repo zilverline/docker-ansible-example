@@ -1,0 +1,23 @@
+---
+
+- name: Enable apt https
+  apt: pkg={{ item }} state=present update_cache=true cache_valid_time=3600
+  with_items:
+    - apt-transport-https
+    - python-pip
+        
+- name: Add docker apt-key
+  apt_key: url=https://get.docker.io/gpg state=present
+
+- name: add repo
+  apt_repository: repo='deb http://get.docker.io/ubuntu docker main' state=present
+
+- name: Install docker
+  apt: pkg={{ item }} state=present update_cache=true cache_valid_time=3600
+  with_items:
+    - lxc-docker
+  
+- name: install docker-py
+  pip: name=docker-py
+  
+  
